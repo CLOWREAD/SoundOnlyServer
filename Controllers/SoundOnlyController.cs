@@ -23,14 +23,14 @@ namespace WebAudioServer.Controllers
     {
 
         public static Hashtable m_Packs = new Hashtable();
-        static Queue<long> m_PackID_Queue = new Queue<long>;
+        static Queue<long> m_PackID_Queue = new Queue<long>();
         [Route("/API/SoundOnly/Upload/{UTC}")]
         public async void  Upload(String UTC)
         {
             //var resp = Request;
             //var bodystr = await new StreamReader(resp.Body).ReadToEndAsync();
-            var s_UpStream = Request.Body;
-            //var s_UpStream = Request.Form.Files.GetFile("soundonly").OpenReadStream();
+            //var s_UpStream = Request.Body;
+            var s_UpStream = Request.Form.Files.GetFile("soundonly").OpenReadStream();
             byte[] buffer= new byte[1474560] ;
 
             var position = 0;
@@ -68,10 +68,10 @@ namespace WebAudioServer.Controllers
             return res ;
         }
         [Route("/API/SoundOnly/GetQueue")]
-        public String ID_Queue()
+        public long[] ID_Queue()
         {
 
-            return m_PackID_Queue.ToList().ToString(); 
+            return m_PackID_Queue.ToList().ToArray();
         }
     }
 }
